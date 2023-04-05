@@ -7,8 +7,14 @@
  * nesneyiTrimle({ isim: '  jane  ' }) // yeni bir nesne döndürür { name: 'jane' }
  */
 function nesneyiTrimle(obj) {
+  for (let x in obj) {
+    obj[x] = obj[x].trim();
+  }
+  return obj;
+
   // ✨ kodlar buraya
 }
+/* console.log(nesneyiTrimle({ foo: " foo ", bar: " bar " })); */
 
 /**
  * [Görev 2] verileniTrimle propları string olan bir nesne alır ve gönderilen propu trimler.
@@ -19,8 +25,12 @@ function nesneyiTrimle(obj) {
  * verileniTrimle({ isim: '  jane  ' , yas: ' 34 '}, 'isim') // şunu döndürür { isim: 'jane', yas: ' 34 '}
  */
 function verileniTrimle(obj, prop) {
+  obj[prop] = obj[prop].trim();
+  return obj;
+
   // ✨ kodlar buraya
 }
+/* console.log(verileniTrimle({ isim: "  jane  ", yas: " 34 " }, "isim")); */
 
 /**
  * [Görev 3] enBuyukTamsayiyiBul bir dizi nesne içinde bulunan tamsayılardan en büyük olanı bulur { tamsayi: 1 }
@@ -32,16 +42,21 @@ function verileniTrimle(obj, prop) {
  */
 function enBuyukTamsayiyiBul(tamsayilar) {
   // ✨ kodlar buraya
+  let maxObj = tamsayilar.reduce(function (max, obj) {
+    return obj.tamsayi > max.tamsayi ? obj : max;
+  });
+  return maxObj;
 }
+let tamsayilar = [{ tamsayi: 1 }, { tamsayi: 3 }, { tamsayi: 2 }];
+console.log(enBuyukTamsayiyiBul(tamsayilar));
 
 function Sayici(ilkSayi) {
   /**
    * [Görev 4A] Sayici bir sayaç oluşturur
    * @param {number} ilkSayi - Sayacin ilk değeri
    */
-  
+
   // ✨ gerekli propları ekleyin
-  
 
   /**
    * [Görev 4B] asagiSay metodu sıfıra doğru sayar
@@ -57,7 +72,7 @@ function Sayici(ilkSayi) {
    */
   this.asagiSay = () => {
     // ✨ kodlar buraya
-  }
+  };
 }
 
 function Mevsimler() {
@@ -81,7 +96,7 @@ function Mevsimler() {
    */
   this.sonraki = () => {
     // ✨ kodlar buraya
-  }
+  };
 }
 
 function Araba(/*kodlar buraya */) {
@@ -91,12 +106,10 @@ function Araba(/*kodlar buraya */) {
    * @param {number} depo - benzin deposu kapasitesi
    * @param {number} kml - arabanın litre başına kat edebileceği km yol
    */
- 
-    this.odometer = 0 // araba 0 kilometrede yüklenecek
-    this.depo = depoBenzin // araba full depoyla yüklenecek
-    // ✨ gerekli propları ekleyin
 
-  
+  this.odometer = 0; // araba 0 kilometrede yüklenecek
+  this.depo = depoBenzin; // araba full depoyla yüklenecek
+  // ✨ gerekli propları ekleyin
 
   /**
    * [Görev 6B] sur metodu odometera km ekler ve aynı oranda depodan benzin tüketir
@@ -113,7 +126,7 @@ function Araba(/*kodlar buraya */) {
    */
   this.sur = (gidilecekyol) => {
     // ✨ kodlar buraya
-  }
+  };
 
   /**
    * [Görev 6C] Depoya benzin ekleme
@@ -128,7 +141,7 @@ function Araba(/*kodlar buraya */) {
    */
   this.benzinal = (litre) => {
     // ✨ kodlar buraya
-  }
+  };
 }
 
 /**
@@ -156,4 +169,4 @@ module.exports = {
   Sayici,
   Mevsimler,
   Araba,
-}
+};
