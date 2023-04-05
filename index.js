@@ -57,6 +57,7 @@ function Sayici(ilkSayi) {
    */
 
   // ✨ gerekli propları ekleyin
+  this.ilkSayi = ilkSayi;
 
   /**
    * [Görev 4B] asagiSay metodu sıfıra doğru sayar
@@ -72,6 +73,7 @@ function Sayici(ilkSayi) {
    */
   this.asagiSay = () => {
     // ✨ kodlar buraya
+    return this.ilkSayi > 0 ? ilkSayi-- : 0;
   };
 }
 

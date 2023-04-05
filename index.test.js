@@ -11,20 +11,27 @@ describe("[Görev 1] nesneyiTrimle", () => {
 });
 
 describe("[Görev 2] verileniTrimle", () => {
-  // test('[3] verilen propu trimliyor', () => {})
-  // test('[4] verilen dışındaki proplar trimlenmeden döndürülüyor', () => {})
-  const input = { isim: "  jane  ", yas: " 34 " };
-  const expected = { isim: "jane", yas: " 34 " };
-  const actual = utils.verileniTrimle(input, "isim");
-  expect(actual).toEqual(expected);
+  test("[3] verilen propu trimliyor", () => {
+    const input = { isim: "  jane  ", yas: " 34 " };
+    const expected = { isim: "jane", yas: " 34 " };
+    const actual = utils.verileniTrimle(input, "isim");
+    expect(actual).toEqual(expected);
+  });
+  test("[4] verilen dışındaki proplar trimlenmeden döndürülüyor", () => {
+    const input = { isim: "  jane  ", yas: " 34 " };
+    const expected = " 34 ";
+    const actual = utils.verileniTrimle(input, "isim");
+    expect(actual.yas).toEqual(expected);
+  });
 });
 
 describe("[Görev 3] enBuyukTamsayiyiBul", () => {
-  // test('[5] bir dizi nesne içindeki en büyük tamsayiyi döndürüyor { tamsayi: 2 }', () => {})
-  const input = [{ tamsayi: 1 }, { tamsayi: 7 }, { tamsayi: 5 }];
-  const expected = { tamsayi: 7 };
-  const actual = utils.enBuyukTamsayiyiBul(input);
-  expect(actual).toEqual(expected);
+  test("[5] bir dizi nesne içindeki en büyük tamsayiyi döndürüyor { tamsayi: 2 }", () => {
+    const input = [{ tamsayi: 1 }, { tamsayi: 7 }, { tamsayi: 5 }];
+    const expected = { tamsayi: 7 };
+    const actual = utils.enBuyukTamsayiyiBul(input);
+    expect(actual).toEqual(expected);
+  });
 });
 
 describe("[Görev 4] Sayici", () => {
