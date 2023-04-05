@@ -39,9 +39,24 @@ describe("[Görev 4] Sayici", () => {
   beforeEach(() => {
     sayici = new utils.Sayici(3); // her test yeni bir sayı ile başlatılıyor
   });
-  // test('[6] sayici.asagiSay ilk çağırılışında başlangıç sayışını yapıyor', () => {})
-  // test('[7] sayici.asagiSay İKİNCİ çağırılışında başlangıç eksi 1 sayıyor', () => {})
-  // test('[8] sayıcı sonunda sıfıra ulaşır ama daha aşağı saymaz', () => {})
+  test("[6] sayici.asagiSay ilk çağırılışında başlangıç sayışını yapıyor", () => {
+    let result = sayici.asagiSay();
+    expect(result).toEqual(3);
+  });
+  test("[7] sayici.asagiSay İKİNCİ çağırılışında başlangıç eksi 1 sayıyor", () => {
+    sayici.asagiSay();
+    let result = sayici.asagiSay();
+    expect(result).toBe(2);
+  });
+  test("[8] sayıcı sonunda sıfıra ulaşır ama daha aşağı saymaz", () => {
+    sayici.asagiSay();
+    sayici.asagiSay();
+    sayici.asagiSay();
+    sayici.asagiSay();
+    sayici.asagiSay();
+    let result = sayici.asagiSay();
+    expect(result).toBe(0);
+  });
 });
 
 describe("[Görev 5] Mevsimler", () => {
@@ -49,12 +64,43 @@ describe("[Görev 5] Mevsimler", () => {
   beforeEach(() => {
     mevsimler = new utils.Mevsimler(); // her test yeni bir mevsimle başlar
   });
-  // test('[9] mevsimler.sonraki İLK çağırılışında "yaz" döndürüyor', () => {})
-  // test('[10] mevsimler.sonraki İKİNCİ çağırılışında "sonbahar" döndürüyor', () => {})
-  // test('[11] mevsimler.sonraki ÜÇÜNCÜ çağırılışında "kış" döndürüyor', () => {})
-  // test('[12] mevsimler.sonraki DÖRDÜNCÜ çağırılışında "ilkbahar" döndürüyor', () => {})
-  // test('[13] mevsimler.sonraki BEŞİNCİ çağırılışında "yaz" döndürüyor', () => {})
-  // test('[14] mevsimler.sonraki KIRKINCI çağırılışında "ilkbahar" döndürüyor', () => {})
+  test('[9] mevsimler.sonraki İLK çağırılışında "yaz" döndürüyor', () => {
+    let result = mevsimler.sonraki();
+    expect(result).toEqual("yaz");
+  });
+  test('[10] mevsimler.sonraki İKİNCİ çağırılışında "sonbahar" döndürüyor', () => {
+    mevsimler.sonraki();
+    let result = mevsimler.sonraki();
+    expect(result).toEqual("sonbahar");
+  });
+  test('[11] mevsimler.sonraki ÜÇÜNCÜ çağırılışında "kış" döndürüyor', () => {
+    mevsimler.sonraki();
+    mevsimler.sonraki();
+    let result = mevsimler.sonraki();
+    expect(result).toBe("kış");
+  });
+  test('[12] mevsimler.sonraki DÖRDÜNCÜ çağırılışında "ilkbahar" döndürüyor', () => {
+    mevsimler.sonraki();
+    mevsimler.sonraki();
+    mevsimler.sonraki();
+    let result = mevsimler.sonraki();
+    expect(result).toBe("ilkbahar");
+  });
+  test('[13] mevsimler.sonraki BEŞİNCİ çağırılışında "yaz" döndürüyor', () => {
+    mevsimler.sonraki();
+    mevsimler.sonraki();
+    mevsimler.sonraki();
+    mevsimler.sonraki();
+    let result = mevsimler.sonraki();
+    expect(result).toEqual("yaz");
+  });
+  test('[14] mevsimler.sonraki KIRKINCI çağırılışında "ilkbahar" döndürüyor', () => {
+    for (let i = 0; i < 39; i++) {
+      mevsimler.sonraki();
+    }
+    let result = mevsimler.sonraki();
+    expect(result).toBe("ilkbahar");
+  });
 });
 
 describe("[Görev 6] Araba", () => {

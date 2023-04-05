@@ -8,7 +8,9 @@
  */
 function nesneyiTrimle(obj) {
   for (let x in obj) {
-    obj[x] = obj[x].trim();
+    if (typeof obj[x] === "string") {
+      obj[x] = obj[x].trim();
+    }
   }
   return obj;
 
@@ -48,7 +50,6 @@ function enBuyukTamsayiyiBul(tamsayilar) {
   return maxObj;
 }
 let tamsayilar = [{ tamsayi: 1 }, { tamsayi: 3 }, { tamsayi: 2 }];
-console.log(enBuyukTamsayiyiBul(tamsayilar));
 
 function Sayici(ilkSayi) {
   /**
@@ -57,7 +58,7 @@ function Sayici(ilkSayi) {
    */
 
   // ✨ gerekli propları ekleyin
-  this.ilkSayi = ilkSayi;
+  let tempSayi = ilkSayi;
 
   /**
    * [Görev 4B] asagiSay metodu sıfıra doğru sayar
@@ -73,9 +74,15 @@ function Sayici(ilkSayi) {
    */
   this.asagiSay = () => {
     // ✨ kodlar buraya
-    return this.ilkSayi > 0 ? ilkSayi-- : 0;
+    return tempSayi > 0 ? tempSayi-- : 0;
   };
 }
+/* const sayac = new Sayici(3);
+console.log(sayac.asagiSay()); // 3 döndürür
+console.log(sayac.asagiSay()); // 2 döndürür
+console.log(sayac.asagiSay()); // 1 döndürür
+console.log(sayac.asagiSay()); // 0 döndürür
+console.log(sayac.asagiSay()); // 0 döndürür */
 
 function Mevsimler() {
   /**
@@ -83,7 +90,8 @@ function Mevsimler() {
    */
 
   // ✨ gerekli propları ekleyin
-
+  let mevsimler = ["ilkbahar", "yaz", "sonbahar", "kış"];
+  let currentIndex = 0;
   /**
    * [Görev 5B] sonraki metodu bir sonraki mevsimi gösterir
    * @returns {string} - bir sonraki mevsim "yaz" olarak yüklenir
@@ -98,8 +106,16 @@ function Mevsimler() {
    */
   this.sonraki = () => {
     // ✨ kodlar buraya
+    currentIndex = (currentIndex + 1) % mevsimler.length;
+    return mevsimler[currentIndex];
   };
 }
+const mevsimler = new Mevsimler();
+console.log(mevsimler.sonraki()); // "yaz" döndürür
+console.log(mevsimler.sonraki()); // "sonbahar" döndürür
+console.log(mevsimler.sonraki()); // "kış" döndürür
+console.log(mevsimler.sonraki()); // "ilkbahar" döndürür
+console.log(mevsimler.sonraki()); // "yaz" döndürür
 
 function Araba(/*kodlar buraya */) {
   /**
