@@ -110,14 +110,14 @@ function Mevsimler() {
     return mevsimler[currentIndex];
   };
 }
-const mevsimler = new Mevsimler();
+/* const mevsimler = new Mevsimler();
 console.log(mevsimler.sonraki()); // "yaz" döndürür
 console.log(mevsimler.sonraki()); // "sonbahar" döndürür
 console.log(mevsimler.sonraki()); // "kış" döndürür
 console.log(mevsimler.sonraki()); // "ilkbahar" döndürür
-console.log(mevsimler.sonraki()); // "yaz" döndürür
+console.log(mevsimler.sonraki()); // "yaz" döndürür */
 
-function Araba(/*kodlar buraya */) {
+function Araba(isim, depoBenzin, kml) {
   /**
    * [Görev 6A] Araba 3 argüman alarak bir araba nesnesi oluşturur
    * @param {string} isim - arabanın ismi
@@ -127,8 +127,10 @@ function Araba(/*kodlar buraya */) {
 
   this.odometer = 0; // araba 0 kilometrede yüklenecek
   this.depo = depoBenzin; // araba full depoyla yüklenecek
+  this.maxDepo = depoBenzin;
   // ✨ gerekli propları ekleyin
-
+  this.isim = isim;
+  this.kml = kml; //bir litre benzinle kat edilecek km
   /**
    * [Görev 6B] sur metodu odometera km ekler ve aynı oranda depodan benzin tüketir
    * @param {string} gidilecekyol - arabayı sürmek istediğimiz km yol
@@ -144,6 +146,15 @@ function Araba(/*kodlar buraya */) {
    */
   this.sur = (gidilecekyol) => {
     // ✨ kodlar buraya
+    let maxGidilecekYol = this.depo * this.kml;
+    if (gidilecekyol <= maxGidilecekYol) {
+      this.odometer += gidilecekyol;
+      this.depo -= gidilecekyol / this.kml;
+      return this.odometer;
+    }
+    this.depo = 0;
+    this.odometer += maxGidilecekYol;
+    return this.odometer;
   };
 
   /**
@@ -158,9 +169,24 @@ function Araba(/*kodlar buraya */) {
    * focus.benzinal(99) // 600 döndürür (depo yalnızca 20 litre alabiliyor)
    */
   this.benzinal = (litre) => {
+    let kalanDepoKapasitesi = this.maxDepo - this.depo;
+    let gidilecekKm;
+    if (litre <= kalanDepoKapasitesi) {
+      this.depo = this.depo + litre;
+      gidilecekKm = this.depo * this.kml;
+      return gidilecekKm;
+    }
+    this.depo = this.maxDepo;
+    gidilecekKm = this.depo * this.kml;
+    return gidilecekKm;
     // ✨ kodlar buraya
   };
 }
+//ÖRNEK;
+const focus = new Araba("focus", 20, 30);
+console.log(focus.sur(600)); // 600 döndürür
+console.log(focus.sur(1)); // 600 döndürür (depo boş olduğundan yol gidilemedi)
+console.log(focus.benzinal(99)); // 600 döndürür (depo yalnızca 20 litre alabiliyor)
 
 /**
  * [Görev 7] Bir sayının çift olup olmadığını asenkron olarak çözümler
@@ -177,6 +203,9 @@ function Araba(/*kodlar buraya */) {
  */
 function asenkronCiftSayi(sayi) {
   // ✨ implement
+  return new Promise((res) => {
+    res(sayi % 2 == 0);
+  });
 }
 
 module.exports = {

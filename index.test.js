@@ -108,13 +108,34 @@ describe("[Görev 6] Araba", () => {
   beforeEach(() => {
     focus = new utils.Araba("focus", 20, 30); // her test yeni bir araba oluşturur
   });
-  // test('[15] arabayı sürünce güncellenmiş odometer döndürüyor', () => {})
-  // test('[16] arabayı sürmek benzin tüketiyor', () => {})
-  // test('[17] benzinalma arabayı sürmeye izin veriyor', () => {})
-  // test('[18] dolu depoya benzin alma etki etmiyor', () => {})
+  test("[15] arabayı sürünce güncellenmiş odometer döndürüyor", () => {
+    expect(focus.sur(100)).toBe(100);
+    expect(focus.sur(100)).toBe(200);
+    expect(focus.sur(300)).toBe(500);
+    expect(focus.sur(300)).toBe(600); //en fazla 600 gidiyor çünkü benzin bitti
+  });
+  test("[16] arabayı sürmek benzin tüketiyor", () => {
+    focus.sur(450);
+    expect(focus.depo).toBe(5);
+  });
+  test("[17] benzinalma arabayı sürmeye izin veriyor", () => {
+    focus.sur(600);
+    focus.benzinal(5);
+    focus.sur(120);
+    expect(focus.odometer).toBe(720);
+  });
+  test("[18] dolu depoya benzin alma etki etmiyor", () => {
+    focus.benzinal(10);
+    expect(focus.depo).toBe(20);
+  });
 });
 
 describe("[Görev 7] asenkronCiftSayi", () => {
-  // test('[19] bir çift sayı verilirse true çözümlüyor', () => {})
-  // test('[20] tek sayı verilirse false çözümlüyor', () => {})
+  test("[19] bir çift sayı verilirse true çözümlüyor", async () => {
+    expect(await utils.asenkronCiftSayi(4)).toBeTruthy();
+  });
+
+  test("[20] tek sayı verilirse false çözümlüyor", async () => {
+    expect(await utils.asenkronCiftSayi(3)).toBeFalsy();
+  });
 });
